@@ -1,0 +1,25 @@
+image: maven:3.6.1
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: 'Maven build'
+          caches:
+            - maven
+          script:
+            - bash build.sh
+          artifacts:
+            - 'target/*.jar'
+      - step:
+          name: 'Deploy to prod server'
+          deployment: Production
+          script:
+            - pipe: atlassian/sftp-deploy:0.5.6
+              variables:
+                USER: 'grabuges'
+                PASSWORD: ''
+                SERVER: '178.170.39.37'
+                REMOTE_PATH: '/home/grabuges/gta/plugins/'
+                LOCAL_PATH: "target/*.jar"
+                EXTRA_ARGS: '-P 64409'

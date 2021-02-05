@@ -1,0 +1,10 @@
+main: fr.grabuges.gta.App
+name: GTACore
+version: 1.0.0
+author: Lucas__Lks
+api-version: 1.13
+depend:
+  - WorldEdit
+  - LuckPerms
+  - SmartInvs
+  - Basics
